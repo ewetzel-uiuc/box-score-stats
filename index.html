@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Score Stats</title>
+    <script type="module" crossorigin src="./assets/index-F4xRLqJG.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C97UK-6i.css">
+  </head>
+  <body>
+    <header>
+      <h1>Box Score Stats</h1>
+      <p class="subtitle">Import a game's box score CSV to track player stats across the season.</p>
+    </header>
+    <main>
+      <section class="league">
+        <label for="league-select">League:</label>
+        <select id="league-select"></select>
+        <form id="new-league-form">
+          <label for="new-league-name">New league:</label>
+          <input id="new-league-name" type="text" maxlength="60" />
+          <button type="submit">Add league</button>
+        </form>
+        <p id="league-error" class="form-error" role="alert"></p>
+        <details id="manage-league">
+          <summary>Manage league</summary>
+          <form id="rename-league-form">
+            <label for="rename-league-name">League name:</label>
+            <input id="rename-league-name" type="text" maxlength="60" />
+            <button type="submit">Rename league</button>
+            <button id="delete-league" type="button" class="danger">Delete league</button>
+          </form>
+          <h3>Teams</h3>
+          <p id="no-teams" class="empty">No teams yet. Teams are added when you import a game, or you can add one below.</p>
+          <ul id="team-list" class="team-list"></ul>
+          <form id="add-team-form">
+            <label for="add-team-name">New team:</label>
+            <input id="add-team-name" type="text" maxlength="60" />
+            <button type="submit">Add team</button>
+          </form>
+          <p id="manage-error" class="form-error" role="alert"></p>
+        </details>
+      </section>
+      <section class="import">
+        <label for="csv-input" class="button">Import box score (.csv)</label>
+        <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
+        <a class="sample-link" href="samples/sample-game-1.csv" download>Download a sample game to try</a>
+        <div id="import-status" role="status"></div>
+      </section>
+      <section>
+        <div class="section-heading">
+          <h2>Season totals</h2>
+          <p id="game-count"></p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Stat category">
+          <button type="button" role="tab" data-category="hitting" aria-selected="true">Hitting</button>
+          <button type="button" role="tab" data-category="pitching" aria-selected="false">Pitching</button>
+        </div>
+        <div class="tabs subtabs" role="tablist" aria-label="Stat detail">
+          <button type="button" role="tab" data-detail="basic" aria-selected="true">Basic</button>
+          <button type="button" role="tab" data-detail="advanced" aria-selected="false">Advanced</button>
+        </div>
+        <div id="stats-table" class="table-scroll" role="tabpanel"></div>
+        <button id="clear-data" type="button" class="danger" hidden>Delete all imported games</button>
+      </section>
+    </main>
+  </body>
+</html>
