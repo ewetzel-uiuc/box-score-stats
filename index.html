@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-F4xRLqJG.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C97UK-6i.css">
+    <script type="module" crossorigin src="./assets/index-CJeIjhhG.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BPyU-uF5.css">
   </head>
   <body>
     <header>
@@ -44,7 +44,8 @@
       <section class="import">
         <label for="csv-input" class="button">Import box score (.csv)</label>
         <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
-        <a class="sample-link" href="samples/sample-game-1.csv" download>Download a sample game to try</a>
+        <a class="sample-link" href="samples/Blank%20Box%20Score.csv" download="Blank Box Score.csv">Download a blank box score</a>
+        <button id="test-downloads" type="button" class="test-downloads-link">or, Download Box Scores for Testing</button>
         <div id="import-status" role="status"></div>
       </section>
       <section>
@@ -61,6 +62,7 @@
           <button type="button" role="tab" data-detail="advanced" aria-selected="false">Advanced</button>
         </div>
         <div id="stats-table" class="table-scroll" role="tabpanel"></div>
+        <button id="export-csv" type="button" class="export-button" hidden>Export season totals (.csv)</button>
         <button id="clear-data" type="button" class="danger" hidden>Delete all imported games</button>
       </section>
     </main>
