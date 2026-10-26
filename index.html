@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-CFUz5vfb.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Dytc_2kv.css">
+    <script type="module" crossorigin src="./assets/index-l7xWwHIM.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DHJb_rjM.css">
   </head>
   <body>
     <header>
@@ -40,6 +40,15 @@
             <button type="submit">Rename league</button>
             <button id="delete-league" type="button" class="danger">Delete league</button>
           </form>
+          <h3>Divisions</h3>
+          <p id="no-divisions" class="empty">No divisions: the standings are one table. Add a division to split them (up to 6).</p>
+          <ul id="division-list" class="team-list"></ul>
+          <form id="add-division-form">
+            <label for="add-division-name">New division:</label>
+            <input id="add-division-name" type="text" maxlength="40" />
+            <button type="submit">Add division</button>
+          </form>
+          <p id="division-error" class="form-error" role="alert"></p>
           <h3>Teams</h3>
           <p id="no-teams" class="empty">No teams yet. Teams are added when you import a game, or you can add one below.</p>
           <ul id="team-list" class="team-list"></ul>
@@ -67,7 +76,7 @@
           <h2>Standings</h2>
           <button id="league-settings" type="button" class="export-button">League Settings</button>
         </div>
-        <div id="standings-table" class="table-scroll"></div>
+        <div id="standings-table"></div>
       </section>
       <section id="stats-view" hidden>
         <div class="section-heading">
