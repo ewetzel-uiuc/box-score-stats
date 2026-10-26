@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-zA0wqZJy.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CEv8nQw6.css">
+    <script type="module" crossorigin src="./assets/index-DIAME_Wn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-pnAEIeVw.css">
   </head>
   <body>
     <header>
@@ -62,15 +62,25 @@
           <p id="game-count"></p>
         </div>
         <div id="scope-tabs" class="tabs scope-tabs" role="tablist" aria-label="League or team"></div>
-        <div class="tabs" role="tablist" aria-label="Stat category">
-          <button type="button" role="tab" data-category="hitting" aria-selected="true">Hitting</button>
-          <button type="button" role="tab" data-category="pitching" aria-selected="false">Pitching</button>
+        <p id="stats-empty" class="empty" hidden></p>
+        <div id="stats-lists">
+          <div class="list-heading">
+            <h3>Hitting</h3>
+            <div class="tabs subtabs" role="tablist" aria-label="Hitting stat detail">
+              <button type="button" role="tab" data-category="hitting" data-detail="basic" aria-selected="true">Basic</button>
+              <button type="button" role="tab" data-category="hitting" data-detail="advanced" aria-selected="false">Advanced</button>
+            </div>
+          </div>
+          <div id="hitting-table" class="table-scroll"></div>
+          <div class="list-heading">
+            <h3>Pitching</h3>
+            <div class="tabs subtabs" role="tablist" aria-label="Pitching stat detail">
+              <button type="button" role="tab" data-category="pitching" data-detail="basic" aria-selected="true">Basic</button>
+              <button type="button" role="tab" data-category="pitching" data-detail="advanced" aria-selected="false">Advanced</button>
+            </div>
+          </div>
+          <div id="pitching-table" class="table-scroll"></div>
         </div>
-        <div class="tabs subtabs" role="tablist" aria-label="Stat detail">
-          <button type="button" role="tab" data-detail="basic" aria-selected="true">Basic</button>
-          <button type="button" role="tab" data-detail="advanced" aria-selected="false">Advanced</button>
-        </div>
-        <div id="stats-table" class="table-scroll" role="tabpanel"></div>
         <button id="export-csv" type="button" class="export-button" hidden>Export season totals (.csv)</button>
         <button id="clear-data" type="button" class="danger" hidden>Delete all imported games</button>
       </section>
