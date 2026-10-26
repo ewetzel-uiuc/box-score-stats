@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-l7xWwHIM.js"></script>
+    <script type="module" crossorigin src="./assets/index-Ce4tzWFy.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-DHJb_rjM.css">
   </head>
   <body>
@@ -49,6 +49,13 @@
             <button type="submit">Add division</button>
           </form>
           <p id="division-error" class="form-error" role="alert"></p>
+          <p id="standings-games-row">
+            <label for="standings-games">Games counted in division standings:</label>
+            <select id="standings-games">
+              <option value="all">All games</option>
+              <option value="division">Only games within the division</option>
+            </select>
+          </p>
           <h3>Teams</h3>
           <p id="no-teams" class="empty">No teams yet. Teams are added when you import a game, or you can add one below.</p>
           <ul id="team-list" class="team-list"></ul>
