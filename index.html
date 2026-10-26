@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-DIAME_Wn.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-pnAEIeVw.css">
+    <script type="module" crossorigin src="./assets/index-CFUz5vfb.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dytc_2kv.css">
   </head>
   <body>
     <header>
@@ -22,8 +22,18 @@
           <button type="submit">Add league</button>
         </form>
         <p id="league-error" class="form-error" role="alert"></p>
-        <details id="manage-league">
-          <summary>Manage league</summary>
+      </section>
+      <!-- Shown inside the League Settings pop-up; kept here between openings. -->
+      <div id="league-settings-holder" hidden>
+        <div id="league-settings-content">
+          <!-- novalidate: the app shows its own error under the box instead of the browser's tooltip. -->
+          <form id="innings-form" novalidate>
+            <label for="innings-per-game">Innings per game:</label>
+            <input id="innings-per-game" type="number" min="1" max="9" step="1" />
+            <button type="submit">Save</button>
+            <span class="hint">Used for ERA.</span>
+          </form>
+          <p id="innings-error" class="form-error" role="alert"></p>
           <form id="rename-league-form">
             <label for="rename-league-name">League name:</label>
             <input id="rename-league-name" type="text" maxlength="60" />
@@ -39,8 +49,8 @@
             <button type="submit">Add team</button>
           </form>
           <p id="manage-error" class="form-error" role="alert"></p>
-        </details>
-      </section>
+        </div>
+      </div>
       <section class="import">
         <label for="csv-input" class="button">Import box score (.csv)</label>
         <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
@@ -53,7 +63,10 @@
         <button type="button" role="tab" data-view="stats" aria-selected="false">League Stats</button>
       </div>
       <section id="overview-view">
-        <h2>Standings</h2>
+        <div class="section-heading">
+          <h2>Standings</h2>
+          <button id="league-settings" type="button" class="export-button">League Settings</button>
+        </div>
         <div id="standings-table" class="table-scroll"></div>
       </section>
       <section id="stats-view" hidden>
