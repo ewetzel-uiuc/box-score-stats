@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-hLX_rN7Q.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Tr_OrdQb.css">
+    <script type="module" crossorigin src="./assets/index-zA0wqZJy.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CEv8nQw6.css">
   </head>
   <body>
     <header>
@@ -48,7 +48,15 @@
         <button id="test-downloads" type="button" class="test-downloads-link">or, Download Box Scores for Testing</button>
         <div id="import-status" role="status"></div>
       </section>
-      <section>
+      <div class="tabs view-tabs" role="tablist" aria-label="League view">
+        <button type="button" role="tab" data-view="overview" aria-selected="true">League Overview</button>
+        <button type="button" role="tab" data-view="stats" aria-selected="false">League Stats</button>
+      </div>
+      <section id="overview-view">
+        <h2>Standings</h2>
+        <div id="standings-table" class="table-scroll"></div>
+      </section>
+      <section id="stats-view" hidden>
         <div class="section-heading">
           <h2>Season totals</h2>
           <p id="game-count"></p>
