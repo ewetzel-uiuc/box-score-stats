@@ -3,35 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-C817KivF.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DHJb_rjM.css">
+    <title>Box Score Stats</title>
+    <script type="module" crossorigin src="./assets/index-y4Fvp6gt.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-coWS_QTZ.css">
   </head>
   <body>
-    <header>
-      <h1>Box Score Stats</h1>
-      <p class="subtitle">Import a game's box score CSV to track player stats across the season.</p>
-    </header>
-    <main>
-      <section class="league">
-        <label for="league-select">League:</label>
-        <select id="league-select"></select>
-        <form id="new-league-form">
-          <label for="new-league-name">New league:</label>
-          <input id="new-league-name" type="text" maxlength="60" />
-          <button type="submit">Add league</button>
-        </form>
-        <p id="league-error" class="form-error" role="alert"></p>
-      </section>
-      <!-- Shown inside the League Settings pop-up; kept here between openings. -->
-      <div id="league-settings-holder" hidden>
-        <div id="league-settings-content">
+    <div class="app">
+      <aside id="sidebar" class="sidebar">
+        <button id="sidebar-toggle" type="button" class="sidebar-toggle" aria-label="Collapse sidebar" aria-expanded="true">☰</button>
+
+        <!-- Layer 1: every league. -->
+        <div id="sidebar-leagues" class="sidebar-layer">
+          <h2 class="sidebar-label">Leagues</h2>
+          <ul id="league-list" class="sidebar-list"></ul>
+          <form id="new-league-form" class="sidebar-label">
+            <label for="new-league-name">New league:</label>
+            <input id="new-league-name" type="text" maxlength="60" />
+            <button type="submit">Add league</button>
+          </form>
+          <p id="league-error" class="form-error sidebar-label" role="alert"></p>
+        </div>
+
+        <!-- Layer 2: one league's pages. -->
+        <div id="sidebar-league" class="sidebar-layer" hidden>
+          <button id="back-to-leagues" type="button" class="sidebar-back sidebar-label">← All leagues</button>
+          <h2 id="sidebar-league-name" class="sidebar-label"></h2>
+        </div>
+        <!-- Page links: in layer 2 when expanded, and as icons when collapsed. -->
+        <nav id="page-links" class="sidebar-list" aria-label="League pages">
+          <button type="button" data-page="overview"><span class="page-icon" aria-hidden="true">🏆</span><span class="sidebar-label">League Overview</span></button>
+          <button type="button" data-page="stats"><span class="page-icon" aria-hidden="true">📊</span><span class="sidebar-label">League Stats</span></button>
+          <button type="button" data-page="games"><span class="page-icon" aria-hidden="true">📅</span><span class="sidebar-label">League Game Logs</span></button>
+          <button type="button" data-page="settings"><span class="page-icon" aria-hidden="true">⚙</span><span class="sidebar-label">League Settings</span></button>
+        </nav>
+      </aside>
+
+      <main>
+        <header>
+          <h1>Box Score Stats</h1>
+          <p class="subtitle">Import a game's box score CSV to track player stats across the season.</p>
+        </header>
+        <section class="import">
+          <label for="csv-input" class="button">Import box score (.csv)</label>
+          <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
+          <a class="sample-link" href="samples/Blank%20Box%20Score.csv" download="Blank Box Score.csv">Download a blank box score</a>
+          <button id="test-downloads" type="button" class="test-downloads-link">or, Download Box Scores for Testing</button>
+          <div id="import-status" role="status"></div>
+        </section>
+
+        <section id="overview-view">
+          <h2 class="page-title">League Overview</h2>
+          <h3>Standings</h3>
+          <div id="standings-table"></div>
+        </section>
+
+        <section id="stats-view" hidden>
+          <div class="section-heading">
+            <h2 class="page-title">League Stats</h2>
+            <p id="game-count"></p>
+          </div>
+          <div class="tabs scope-tabs" data-scope-tabs role="tablist" aria-label="League or team"></div>
+          <p id="stats-empty" class="empty" hidden></p>
+          <div id="stats-lists">
+            <div class="list-heading">
+              <h3>Hitting</h3>
+              <div class="tabs subtabs" role="tablist" aria-label="Hitting stat detail">
+                <button type="button" role="tab" data-category="hitting" data-detail="basic" aria-selected="true">Basic</button>
+                <button type="button" role="tab" data-category="hitting" data-detail="advanced" aria-selected="false">Advanced</button>
+              </div>
+            </div>
+            <div id="hitting-table" class="table-scroll"></div>
+            <div class="list-heading">
+              <h3>Pitching</h3>
+              <div class="tabs subtabs" role="tablist" aria-label="Pitching stat detail">
+                <button type="button" role="tab" data-category="pitching" data-detail="basic" aria-selected="true">Basic</button>
+                <button type="button" role="tab" data-category="pitching" data-detail="advanced" aria-selected="false">Advanced</button>
+              </div>
+            </div>
+            <div id="pitching-table" class="table-scroll"></div>
+          </div>
+          <button id="export-csv" type="button" class="export-button" hidden>Export season totals (.csv)</button>
+          <button id="clear-data" type="button" class="danger" hidden>Delete all imported games</button>
+        </section>
+
+        <section id="games-view" hidden>
+          <h2 class="page-title">League Game Logs</h2>
+          <div class="tabs scope-tabs" data-scope-tabs role="tablist" aria-label="League or team"></div>
+          <p class="hint">Newest first. Click a game to see its box score and player stats.</p>
+          <div id="game-list" class="game-list"></div>
+        </section>
+
+        <section id="settings-view" hidden>
+          <h2 class="page-title">League Settings</h2>
           <!-- novalidate: the app shows its own error under the box instead of the browser's tooltip. -->
           <form id="innings-form" novalidate>
             <label for="innings-per-game">Innings per game:</label>
             <input id="innings-per-game" type="number" min="1" max="9" step="1" />
             <button type="submit">Save</button>
-            <span class="hint">Used for ERA.</span>
+            <span class="hint">Used for ERA and FIP.</span>
           </form>
           <p id="innings-error" class="form-error" role="alert"></p>
           <form id="rename-league-form">
@@ -65,59 +134,8 @@
             <button type="submit">Add team</button>
           </form>
           <p id="manage-error" class="form-error" role="alert"></p>
-        </div>
-      </div>
-      <section class="import">
-        <label for="csv-input" class="button">Import box score (.csv)</label>
-        <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
-        <a class="sample-link" href="samples/Blank%20Box%20Score.csv" download="Blank Box Score.csv">Download a blank box score</a>
-        <button id="test-downloads" type="button" class="test-downloads-link">or, Download Box Scores for Testing</button>
-        <div id="import-status" role="status"></div>
-      </section>
-      <div class="tabs view-tabs" role="tablist" aria-label="League view">
-        <button type="button" role="tab" data-view="overview" aria-selected="true">League Overview</button>
-        <button type="button" role="tab" data-view="stats" aria-selected="false">League Stats</button>
-      </div>
-      <section id="overview-view">
-        <div class="section-heading">
-          <h2>Standings</h2>
-          <button id="league-settings" type="button" class="export-button">League Settings</button>
-        </div>
-        <div id="standings-table"></div>
-      </section>
-      <section id="stats-view" hidden>
-        <div class="section-heading">
-          <h2>Season totals</h2>
-          <p id="game-count"></p>
-        </div>
-        <div id="scope-tabs" class="tabs scope-tabs" role="tablist" aria-label="League or team"></div>
-        <p id="stats-empty" class="empty" hidden></p>
-        <div id="stats-lists">
-          <div class="list-heading">
-            <h3>Hitting</h3>
-            <div class="tabs subtabs" role="tablist" aria-label="Hitting stat detail">
-              <button type="button" role="tab" data-category="hitting" data-detail="basic" aria-selected="true">Basic</button>
-              <button type="button" role="tab" data-category="hitting" data-detail="advanced" aria-selected="false">Advanced</button>
-            </div>
-          </div>
-          <div id="hitting-table" class="table-scroll"></div>
-          <div class="list-heading">
-            <h3>Pitching</h3>
-            <div class="tabs subtabs" role="tablist" aria-label="Pitching stat detail">
-              <button type="button" role="tab" data-category="pitching" data-detail="basic" aria-selected="true">Basic</button>
-              <button type="button" role="tab" data-category="pitching" data-detail="advanced" aria-selected="false">Advanced</button>
-            </div>
-          </div>
-          <div id="pitching-table" class="table-scroll"></div>
-        </div>
-        <button id="export-csv" type="button" class="export-button" hidden>Export season totals (.csv)</button>
-        <button id="clear-data" type="button" class="danger" hidden>Delete all imported games</button>
-      </section>
-      <section>
-        <h2>Games</h2>
-        <p class="hint">Newest first. Click a game to see its box score and player stats.</p>
-        <div id="game-list" class="game-list"></div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
