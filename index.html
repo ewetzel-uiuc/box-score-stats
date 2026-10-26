@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-y4Fvp6gt.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-coWS_QTZ.css">
+    <script type="module" crossorigin src="./assets/index-DG0vqtsV.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BMANTYjh.css">
   </head>
   <body>
     <div class="app">
@@ -36,6 +36,10 @@
           <button type="button" data-page="games"><span class="page-icon" aria-hidden="true">📅</span><span class="sidebar-label">League Game Logs</span></button>
           <button type="button" data-page="settings"><span class="page-icon" aria-hidden="true">⚙</span><span class="sidebar-label">League Settings</span></button>
         </nav>
+        <!-- Pinned to the bottom of the sidebar. -->
+        <button id="import-button" type="button" class="sidebar-import" title="Import a box score" aria-label="Import a box score">
+          <span aria-hidden="true">＋</span><span class="sidebar-label">Import a game</span>
+        </button>
       </aside>
 
       <main>
@@ -43,13 +47,9 @@
           <h1>Box Score Stats</h1>
           <p class="subtitle">Import a game's box score CSV to track player stats across the season.</p>
         </header>
-        <section class="import">
-          <label for="csv-input" class="button">Import box score (.csv)</label>
-          <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
-          <a class="sample-link" href="samples/Blank%20Box%20Score.csv" download="Blank Box Score.csv">Download a blank box score</a>
-          <button id="test-downloads" type="button" class="test-downloads-link">or, Download Box Scores for Testing</button>
-          <div id="import-status" role="status"></div>
-        </section>
+        <!-- Opened from the + in the sidebar's import pop-up. -->
+        <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
+        <div id="import-status" role="status"></div>
 
         <section id="overview-view">
           <h2 class="page-title">League Overview</h2>
