@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-Bw9DHI46.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-pAKtYW8J.css">
+    <title>Box Score Stats</title>
+    <script type="module" crossorigin src="./assets/index-jRfK29Rg.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-B8sKlWds.css">
   </head>
   <body>
     <div class="app">
@@ -95,47 +95,63 @@
 
         <section id="settings-view" hidden>
           <h2 class="page-title">League Settings</h2>
-          <!-- novalidate: the app shows its own error under the box instead of the browser's tooltip. -->
-          <form id="innings-form" novalidate>
-            <label for="innings-per-game">Innings per game:</label>
-            <input id="innings-per-game" type="number" min="1" max="9" step="1" />
-            <button type="submit">Save</button>
-            <span class="hint">Used for ERA and FIP.</span>
-          </form>
-          <p id="innings-error" class="form-error" role="alert"></p>
-          <form id="rename-league-form">
-            <label for="rename-league-name">League name:</label>
-            <input id="rename-league-name" type="text" maxlength="60" />
-            <button type="submit">Rename league</button>
+
+          <div class="settings-box">
+            <h3>General</h3>
+            <form id="rename-league-form">
+              <label for="rename-league-name">League name:</label>
+              <input id="rename-league-name" type="text" maxlength="60" />
+              <button type="submit">Rename league</button>
+            </form>
+            <p id="rename-error" class="form-error" role="alert"></p>
+            <!-- novalidate: the app shows its own error under the box instead of the browser's tooltip. -->
+            <form id="innings-form" novalidate>
+              <label for="innings-per-game">Innings per game:</label>
+              <input id="innings-per-game" type="number" min="1" max="9" step="1" />
+              <button type="submit">Save</button>
+              <span class="hint">Used for ERA and FIP.</span>
+            </form>
+            <p id="innings-error" class="form-error" role="alert"></p>
+          </div>
+
+          <div class="settings-box">
+            <h3>Divisions</h3>
+            <p id="no-divisions" class="empty">No divisions: the standings are one table. Add a division to split them (up to 6).</p>
+            <ul id="division-list" class="team-list"></ul>
+            <form id="add-division-form">
+              <label for="add-division-name">New division:</label>
+              <input id="add-division-name" type="text" maxlength="40" />
+              <button type="submit">Add division</button>
+            </form>
+            <p id="division-error" class="form-error" role="alert"></p>
+            <p id="standings-games-row">
+              <label for="standings-games">Games counted in division standings:</label>
+              <select id="standings-games">
+                <option value="all">All games</option>
+                <option value="division">Only games within the division</option>
+              </select>
+            </p>
+          </div>
+
+          <div class="settings-box">
+            <h3>Teams</h3>
+            <p id="no-teams" class="empty">No teams yet. Teams are added when you import a game, or you can add one below.</p>
+            <ul id="team-list" class="team-list"></ul>
+            <form id="add-team-form">
+              <label for="add-team-name">New team:</label>
+              <input id="add-team-name" type="text" maxlength="60" />
+              <button type="submit">Add team</button>
+            </form>
+            <p id="manage-error" class="form-error" role="alert"></p>
+          </div>
+
+          <div class="settings-box danger-box">
+            <h3>Delete league</h3>
+            <p class="hint">Deletes this league with all of its games, players, teams and divisions. This cannot be undone.</p>
             <button id="delete-league" type="button" class="danger">Delete league</button>
-          </form>
-          <h3>Divisions</h3>
-          <p id="no-divisions" class="empty">No divisions: the standings are one table. Add a division to split them (up to 6).</p>
-          <ul id="division-list" class="team-list"></ul>
-          <form id="add-division-form">
-            <label for="add-division-name">New division:</label>
-            <input id="add-division-name" type="text" maxlength="40" />
-            <button type="submit">Add division</button>
-          </form>
-          <p id="division-error" class="form-error" role="alert"></p>
-          <p id="standings-games-row">
-            <label for="standings-games">Games counted in division standings:</label>
-            <select id="standings-games">
-              <option value="all">All games</option>
-              <option value="division">Only games within the division</option>
-            </select>
-          </p>
-          <h3>Teams</h3>
-          <p id="no-teams" class="empty">No teams yet. Teams are added when you import a game, or you can add one below.</p>
-          <ul id="team-list" class="team-list"></ul>
-          <form id="add-team-form">
-            <label for="add-team-name">New team:</label>
-            <input id="add-team-name" type="text" maxlength="60" />
-            <button type="submit">Add team</button>
-          </form>
-          <p id="manage-error" class="form-error" role="alert"></p>
+          </div>
         </section>
       </main>
-    </div>
+    </div>
   </body>
 </html>
