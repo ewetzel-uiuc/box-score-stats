@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-jRfK29Rg.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B8sKlWds.css">
+    <script type="module" crossorigin src="./assets/index-CKnwUSdb.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CCaPKs_O.css">
   </head>
   <body>
     <div class="app">
@@ -91,6 +91,31 @@
           <div class="tabs scope-tabs" data-scope-tabs role="tablist" aria-label="League or team"></div>
           <p class="hint">Newest first. Click a game to see its box score and player stats.</p>
           <div id="game-list" class="game-list"></div>
+        </section>
+
+        <!-- One team's page, opened by clicking a team in the standings or a stats table. -->
+        <section id="team-view" hidden>
+          <div class="team-header">
+            <h2 id="team-title" class="page-title"></h2>
+            <button id="edit-team" type="button" class="icon-button" title="Edit team" aria-label="Edit team">⚙</button>
+          </div>
+          <p id="team-subtitle" class="hint"></p>
+          <div id="team-summary" class="team-summary"></div>
+          <div class="list-heading">
+            <h3>Hitting</h3>
+            <div id="team-hitting-detail"></div>
+          </div>
+          <div id="team-hitting" class="table-scroll"></div>
+          <div class="list-heading">
+            <h3>Pitching</h3>
+            <div id="team-pitching-detail"></div>
+          </div>
+          <div id="team-pitching" class="table-scroll"></div>
+          <div class="list-heading">
+            <h3>Recent games</h3>
+            <button id="team-all-games" type="button" class="link-button">See all of this team's games</button>
+          </div>
+          <div id="team-recent-games" class="game-list"></div>
         </section>
 
         <section id="settings-view" hidden>
