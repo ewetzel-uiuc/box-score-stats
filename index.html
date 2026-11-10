@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Box Score Stats</title>
-    <script type="module" crossorigin src="./assets/index-BBJ9Od4l.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B98yyyzi.css">
+    <title>Box Score Stats</title>
+    <script type="module" crossorigin src="./assets/index-DFZoYonv.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CBhNfJsp.css">
   </head>
   <body>
     <div class="app">
@@ -53,6 +53,7 @@
 
         <section id="overview-view">
           <h2 class="page-title">League Overview</h2>
+          <div class="season-picker" data-season-picker="overview"></div>
           <h3>Standings</h3>
           <div id="standings-table"></div>
         </section>
@@ -62,6 +63,7 @@
             <h2 class="page-title">League Stats</h2>
             <p id="game-count"></p>
           </div>
+          <div class="season-picker" data-season-picker="stats"></div>
           <div class="tabs scope-tabs" data-scope-tabs role="tablist" aria-label="League or team"></div>
           <p id="stats-empty" class="empty" hidden></p>
           <div id="stats-lists">
@@ -88,6 +90,7 @@
 
         <section id="games-view" hidden>
           <h2 class="page-title">League Game Logs</h2>
+          <div class="season-picker" data-season-picker="games"></div>
           <div class="tabs scope-tabs" data-scope-tabs role="tablist" aria-label="League or team"></div>
           <p class="hint">Newest first. Click a game to see its box score and player stats.</p>
           <div id="game-list" class="game-list"></div>
@@ -103,6 +106,7 @@
             <button id="edit-team" type="button" class="icon-button" title="Edit team" aria-label="Edit team">⚙</button>
           </div>
           <p id="team-subtitle" class="hint"></p>
+          <div class="season-picker" data-season-picker="team"></div>
           <div id="team-summary" class="team-summary"></div>
           <div class="list-heading">
             <h3>Hitting</h3>
@@ -143,6 +147,26 @@
           </div>
 
           <div class="settings-box">
+            <h3>Seasons</h3>
+            <p id="no-seasons" class="empty">No seasons yet. Add one with its first and last day; games played between them count in it.</p>
+            <ul id="season-list" class="season-list"></ul>
+            <p id="games-without-season" class="hint"></p>
+            <form id="add-season-form" novalidate>
+              <label for="add-season-start">New season from</label>
+              <input id="add-season-start" type="date" />
+              <label for="add-season-end">to</label>
+              <input id="add-season-end" type="date" />
+              <button type="submit">Add season</button>
+            </form>
+            <p id="season-error" class="form-error" role="alert"></p>
+          </div>
+
+          <div class="season-settings-heading">
+            <p class="hint">The divisions and teams below are for the season shown. Each season can have its own.</p>
+            <div class="season-picker" data-season-picker="settings"></div>
+          </div>
+
+          <div class="settings-box">
             <h3>Divisions</h3>
             <p id="no-divisions" class="empty">No divisions: the standings are one table. Add a division to split them (up to 6).</p>
             <ul id="division-list" class="team-list"></ul>
@@ -180,6 +204,6 @@
           </div>
         </section>
       </main>
-    </div>
+    </div>
   </body>
 </html>
